@@ -541,12 +541,23 @@
     }
 
     function handleSubmit(e) {
-      e.preventDefault();
-      var email = document.getElementById('email').value.trim();
-      if (!email) return;
-      showToast("You're on the list! We'll reach out soon.");
-      document.getElementById('email').value = '';
-    }
-  </script>
+    e.preventDefault();
+
+    var email = document.getElementById('email').value.trim();
+
+    fetch("https://script.google.com/macros/s/AKfycbwTUF5lOHVYEEowbLnoZafIs-8wn95p0I6Xn6a37A446fr105G7cGhPi48UR1aaNJ29GQ/exec", {
+        method: "POST",
+        body: new URLSearchParams({
+        email: email
+       })
+    })
+    .then(res => {
+    showToast("You're on the list! We'll reach out soon.");
+    document.getElementById('email').value = '';
+  })
+  .catch(err => {
+    showToast("Something went wrong", true);
+  });
+}  </script>
 </body>
 </html>
