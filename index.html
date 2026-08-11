@@ -1,616 +1,1106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>CrewKart — Coming Soon</title>
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
   <style>
+    /* =========================
+       RESET
+    ========================== */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html,
-    body {
-      height: 100%;
-      overflow: hidden;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 50% 40%, #1a1e3a, #0D1026 70%);
-      position: relative;
+      min-height: 100vh;
+      background: #020617;
       color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 80px 80px;
-      pointer-events: none;
-      z-index: 0;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity: 0.03;
-      pointer-events: none;
-    }
 
-    /* Ambient Background Glows */
-    .glow-1 {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(123, 44, 255, 0.12), transparent 70%);
-      top: -200px;
-      right: -150px;
-      pointer-events: none;
-      animation: drift 15s ease-in-out infinite;
-    }
-
-    .glow-2 {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(168, 85, 255, 0.12), transparent 70%);
-      bottom: -150px;
-      left: -120px;
-      pointer-events: none;
-      animation: drift 18s ease-in-out infinite reverse;
-    }
-
-    .center-glow {
-      position: fixed;
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(123, 44, 255, 0.05), transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(25px, 15px); }
-    }
-
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(123, 44, 255, 0.4); }
-      50% { opacity: 0.6; box-shadow: 0 0 10px 4px rgba(123, 44, 255, 0.1); }
-    }
-
-    @keyframes logoGlow {
-      0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.05); }
-    }
-
-    @keyframes socialFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
+    /* =========================
+       MAIN PAGE
+    ========================== */
 
     .page {
+      width: 100%;
       height: 100vh;
+      background: #020617;
       display: flex;
       flex-direction: column;
-      position: relative;
-      z-index: 1;
     }
 
-    /* Top Bar */
+
+    /* =========================
+       HEADER
+    ========================== */
+
     .topbar {
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: clamp(14px, 2.6vh, 30px) clamp(24px, 3vw, 48px) 0;
+
       display: flex;
       align-items: center;
-      padding: 30px 50px;
-      flex-shrink: 0;
-      animation: fadeUp 0.8s ease both;
+      justify-content: flex-start;
     }
 
     .topbar-logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
+      justify-content: center;
     }
 
-    .topbar-logo:hover {
-      opacity: 0.8;
-    }
+    /*
+      TOP LEFT LOGO:
+      CREWKART__5_-removebg-preview.png
+    */
 
-    .logo-sm {
-      height: 40px; /* Increased from 32px */
-      object-fit: contain;
+    .topbar-logo img {
+      width: clamp(100px, 9vw, 160px);
+      height: auto;
       display: block;
+      object-fit: contain;
     }
 
-    /* Center Content */
-    .center {
-      flex: 1;
+
+    /* =========================
+       MAIN CONTENT
+    ========================== */
+
+    .main-content {
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0 24px;
-      gap: 0;
+
+      padding: clamp(4px, 1vh, 16px) clamp(24px, 3vw, 48px);
+      flex: 1;
       min-height: 0;
     }
 
+
+    /* =========================
+       CENTER LOGO
+    ========================== */
+
     .logo-wrap {
       position: relative;
-      margin-bottom: 30px;
-      animation: fadeUp 0.8s ease both;
-      flex-shrink: 0;
+
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
+
+      margin-bottom: clamp(4px, 1vh, 16px);
     }
 
     .logo-glow {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 240px; /* Increased to accommodate larger logo */
-      height: 240px; /* Increased to accommodate larger logo */
+
+      width: clamp(70px, 10vh, 130px);
+      height: clamp(70px, 10vh, 130px);
+
+      background: #7c3aed;
+      opacity: 0.16;
+
+      filter: blur(40px);
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(123, 44, 255, 0.25), rgba(168, 85, 255, 0.1) 50%, transparent 70%);
-      filter: blur(20px);
-      animation: logoGlow 4s ease-in-out infinite;
+
       pointer-events: none;
-      z-index: 0;
     }
+
+    /*
+      CENTER LOGO:
+      heading (2).png
+    */
 
     .logo-lg {
-      height: 85px; /* Increased from 60px */
-      object-fit: contain;
-      display: block;
       position: relative;
-      z-index: 1;
+
+      width: clamp(90px, 10vh, 150px);
+      height: auto;
+
+      display: block;
+      object-fit: contain;
     }
 
-    .coming-soon {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: #A855FF;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      animation: fadeUp 0.8s ease 0.15s both;
-    }
 
-    .coming-soon-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: #7B2CFF;
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
+    /* =========================
+       HEADLINE
+    ========================== */
 
     .headline {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 3rem;
+      font-size: clamp(24px, 3.6vh, 38px);
+      line-height: 1.2;
+
       font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+
       text-align: center;
-      line-height: 1.1;
-      animation: fadeUp 0.8s ease 0.2s both;
+
+      margin-top: 0;
     }
 
-    .desc {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      max-width: 480px;
-      text-align: center;
-      margin-bottom: 40px;
-      animation: fadeUp 0.8s ease 0.3s both;
+    .accent {
+      color: #7c3aed;
     }
+
+
+    /* =========================
+       DESCRIPTION
+    ========================== */
+
+    .description {
+      max-width: clamp(400px, 46vw, 620px);
+
+      margin-top: clamp(6px, 1.2vh, 16px);
+
+      font-size: clamp(12px, 1.7vh, 16px);
+      line-height: 1.45;
+
+      color: #9ca3af;
+
+      text-align: center;
+    }
+
+
+    /* =========================
+       COMING SOON DIVIDER
+    ========================== */
+
+    .coming-soon {
+      width: clamp(420px, 44vw, 600px);
+      max-width: 90%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: clamp(14px, 2vw, 26px);
+
+      margin-top: clamp(10px, 2vh, 26px);
+      margin-bottom: clamp(10px, 1.8vh, 22px);
+    }
+
+    .coming-line {
+      height: 1px;
+      flex: 1;
+
+      background: #7c3aed;
+      opacity: 0.9;
+    }
+
+    .coming-text {
+      color: #8b2cf5;
+
+      font-size: clamp(10px, 1.35vh, 13px);
+      font-weight: 700;
+
+      letter-spacing: 1.4px;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+       WAITLIST CARD
+    ========================== */
+
+    .waitlist-card {
+      width: clamp(440px, 44vw, 600px);
+      max-width: 90%;
+
+      padding: clamp(14px, 2.2vh, 26px) clamp(22px, 3vw, 34px) clamp(12px, 2vh, 22px);
+
+      border: 1px solid rgba(124, 58, 237, 0.55);
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(12, 15, 35, 0.98),
+          rgba(4, 7, 23, 0.98)
+        );
+
+      box-shadow:
+        0 0 30px rgba(124, 58, 237, 0.07);
+    }
+
+
+    /* =========================
+       EMAIL FORM
+    ========================== */
 
     .email-form {
-      display: flex;
-      gap: 12px;
       width: 100%;
-      max-width: 460px;
-      margin-bottom: 48px;
-      animation: fadeUp 0.8s ease 0.4s both;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: clamp(8px, 1.4vh, 14px);
     }
 
     .email-input {
-      flex: 1;
-      padding: 16px 20px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.03);
-      color: #fff;
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
+      width: 100%;
+      height: clamp(38px, 5.6vh, 50px);
+
+      padding: 0 18px;
+
+      border-radius: 10px;
+
+      border: 1px solid rgba(124, 58, 237, 0.5);
+
+      background: #0a0d20;
+
+      color: #ffffff;
+
+      font-size: clamp(12px, 1.6vh, 14px);
+      font-family: inherit;
+
       outline: none;
-      transition: all 0.3s ease;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+
+      transition: 0.2s ease;
     }
 
     .email-input::placeholder {
-      color: rgba(255, 255, 255, 0.3);
+      color: #6b7280;
     }
 
     .email-input:focus {
-      border-color: #7B2CFF;
-      background: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 0 0 4px rgba(123, 44, 255, 0.15);
+      border-color: #8b2cf5;
+
+      box-shadow:
+        0 0 0 3px rgba(124, 58, 237, 0.16);
     }
 
+
+    /* =========================
+       SUBMIT BUTTON
+    ========================== */
+
     .submit-btn {
-      padding: 16px 32px;
-      border-radius: 12px;
+      width: 100%;
+      height: clamp(38px, 5.6vh, 50px);
+
       border: none;
-      background: #7B2CFF; 
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #7c3aed,
+          #a10de8
+        );
+
       color: #ffffff;
-      font-weight: 600;
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
+
+      font-size: clamp(13px, 1.7vh, 15px);
+      font-weight: 700;
+      font-family: inherit;
+
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      white-space: nowrap;
-      box-shadow: 0 4px 15px rgba(123, 44, 255, 0.3);
+
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .submit-btn:hover {
-      transform: translateY(-2px);
-      background: #8A44FF;
-      box-shadow: 0 8px 25px rgba(123, 44, 255, 0.5);
+      transform: translateY(-1px);
+
+      opacity: 0.95;
+
+      box-shadow:
+        0 7px 20px rgba(124, 58, 237, 0.25);
     }
 
     .submit-btn:active {
       transform: translateY(0);
-      box-shadow: 0 4px 15px rgba(123, 44, 255, 0.3);
     }
+
+
+    /* =========================
+       SOCIAL PROOF
+    ========================== */
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: clamp(6px, 1vh, 10px);
+
+      margin-top: clamp(10px, 1.6vh, 18px);
+
+      color: #9ca3af;
+
+      font-size: clamp(10px, 1.35vh, 13px);
+    }
+
+    .social-proof strong {
+      color: #a78bfa;
+      font-weight: 700;
+    }
+
+    .avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: clamp(22px, 3vh, 30px);
+      height: clamp(22px, 3vh, 30px);
+
+      margin-left: -7px;
+
+      border-radius: 50%;
+
+      border: 2px solid #020617;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f5d0a9,
+          #7c3aed
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #ffffff;
+
+      font-size: clamp(8px, 1vh, 11px);
+      font-weight: 700;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+
+    /* =========================
+       FEATURE CARDS
+    ========================== */
+
+    .features {
+      width: clamp(440px, 44vw, 600px);
+      max-width: 90%;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: clamp(10px, 1.6vw, 20px);
+
+      margin-top: clamp(12px, 2.2vh, 28px);
+    }
+
+    .feature-card {
+      min-height: clamp(56px, 8.2vh, 84px);
+
+      padding: clamp(9px, 1.5vh, 16px);
+
+      border: 1px solid rgba(124, 58, 237, 0.48);
+
+      border-radius: 10px;
+
+      background: rgba(7, 10, 29, 0.8);
+
+      display: flex;
+      align-items: center;
+
+      gap: clamp(7px, 1vw, 12px);
+    }
+
+    .feature-icon {
+      width: clamp(26px, 3.6vh, 40px);
+      height: clamp(26px, 3.6vh, 40px);
+
+      min-width: clamp(26px, 3.6vh, 40px);
+
+      border-radius: 50%;
+
+      background: rgba(124, 58, 237, 0.28);
+
+      color: #a855f7;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon iconify-icon {
+      font-size: clamp(13px, 1.9vh, 19px);
+    }
+
+    .feature-content {
+      min-width: 0;
+    }
+
+    .feature-content h3 {
+      font-size: clamp(9.5px, 1.35vh, 14px);
+      line-height: 1.25;
+
+      color: #ffffff;
+
+      font-weight: 700;
+
+      margin-bottom: 4px;
+    }
+
+    .feature-content p {
+      font-size: clamp(7.5px, 1.1vh, 12px);
+      line-height: 1.35;
+
+      color: #8a92a3;
+    }
+
+
+    /* =========================
+       FOLLOW TITLE
+    ========================== */
+
+    .follow-title {
+      margin-top: clamp(12px, 2vh, 26px);
+
+      font-size: clamp(10px, 1.35vh, 14px);
+
+      color: #9ca3af;
+
+      text-align: center;
+    }
+
+
+    /* =========================
+       SOCIAL LINKS
+    ========================== */
 
     .social-links {
       display: flex;
-      gap: 16px;
-      animation: fadeUp 0.8s ease 0.5s both;
+      align-items: center;
+      justify-content: center;
+
+      gap: clamp(8px, 1.2vw, 16px);
+
+      margin-top: clamp(6px, 1.2vh, 14px);
     }
 
     .social-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+      width: clamp(28px, 3.8vh, 42px);
+      height: clamp(28px, 3.8vh, 42px);
 
-    .social-link-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50%;
+
+      border: 1px solid rgba(124, 58, 237, 0.6);
+
+      color: #8b2cf5;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
 
-    .social-link:hover {
-      transform: translateY(-4px);
-    }
-
-    .social-link:hover .social-link-icon {
-      border-color: #A855FF;
-      background: rgba(123, 44, 255, 0.1);
-      box-shadow: 0 10px 25px -5px rgba(123, 44, 255, 0.3);
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
     }
 
     .social-link iconify-icon {
-      font-size: 24px;
-      color: rgba(255, 255, 255, 0.6);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
+      font-size: clamp(13px, 1.9vh, 19px);
     }
 
-    .social-link:hover iconify-icon {
-      color: #F2EDFF; 
+    .social-link:hover {
+      background: #7c3aed;
+
+      color: #ffffff;
+
+      transform: translateY(-2px);
     }
 
-    .social-link-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.4);
-      letter-spacing: 0.02em;
-      transition: color 0.3s ease;
-    }
 
-    .social-link:hover .social-link-label {
-      color: rgba(255, 255, 255, 0.9);
-    }
+    /* =========================
+       FOOTER
+    ========================== */
 
-    .social-link:nth-child(1) .social-link-icon { animation: socialFloat 5s ease-in-out infinite; }
-    .social-link:nth-child(2) .social-link-icon { animation: socialFloat 5s ease-in-out 0.4s infinite; }
-    .social-link:nth-child(3) .social-link-icon { animation: socialFloat 5s ease-in-out 0.8s infinite; }
-    .social-link:nth-child(4) .social-link-icon { animation: socialFloat 5s ease-in-out 1.2s infinite; }
-    .social-link:nth-child(5) .social-link-icon { animation: socialFloat 5s ease-in-out 1.6s infinite; }
+    .footer {
+      width: 100%;
+      max-width: 1300px;
 
-    /* Bottom Bar */
-    .bottombar {
+      margin: 0 auto;
+
+      padding: clamp(8px, 1.6vh, 22px) clamp(24px, 3vw, 48px) clamp(12px, 1.8vh, 22px);
+
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 24px 40px;
-      flex-shrink: 0;
-      animation: fadeUp 0.8s ease 0.6s both;
+      justify-content: space-between;
+
+      color: #6b7280;
+
+      font-size: clamp(10px, 1.35vh, 13px);
     }
 
-    .bottombar-copy {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.8rem;
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #0D1026;
-      border: 1px solid #7B2CFF;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      z-index: 100;
-      opacity: 0;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .footer-links {
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 15px 40px rgba(13, 16, 38, 0.8), 0 0 20px rgba(123, 44, 255, 0.2);
-      white-space: nowrap;
+
+      gap: 14px;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .footer-links a {
+      transition: color 0.2s ease;
     }
 
-    .toast.error {
-      border-color: #EF4444;
-      box-shadow: 0 15px 40px rgba(13, 16, 38, 0.8), 0 0 20px rgba(239, 68, 68, 0.2);
+    .footer-links a:hover {
+      color: #a855f7;
     }
 
-    /* Ambient Side Details */
-    .side-line {
-      position: fixed;
-      width: 1px;
-      height: 120px;
-      background: linear-gradient(to bottom, transparent, rgba(123, 44, 255, 0.3), transparent);
-      pointer-events: none;
-      z-index: 0;
+    .separator {
+      color: #4b5563;
     }
 
-    .side-line.left { left: 40px; top: 50%; transform: translateY(-50%); }
-    .side-line.right { right: 40px; top: 50%; transform: translateY(-50%); }
 
-    .side-dot {
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      background: rgba(168, 85, 255, 0.5);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
+    /* =========================
+       RESPONSIVE (MOBILE / TABLET)
+    ========================== */
 
-    .side-dot.d1 { left: 38.5px; top: calc(50% - 70px); }
-    .side-dot.d2 { left: 38.5px; top: calc(50% + 70px); }
-    .side-dot.d3 { right: 38.5px; top: calc(50% - 70px); }
-    .side-dot.d4 { right: 38.5px; top: calc(50% + 70px); }
+    @media (max-width: 768px) {
 
-    /* Mobile Responsiveness */
-    @media (max-width: 640px) {
-      .headline { font-size: 2.2rem; }
-      .desc { font-size: 0.95rem; margin-bottom: 30px; }
-      .topbar { padding: 20px; justify-content: center; }
-      
-      .email-form {
-        flex-direction: column;
-        max-width: 100%;
-        gap: 12px;
+      .page {
+        height: auto;
+        min-height: 100vh;
       }
-      .submit-btn { width: 100%; padding: 16px; }
-      
-      .social-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
-      .social-link-icon { width: 50px; height: 50px; border-radius: 14px; }
-      .social-link iconify-icon { font-size: 22px; }
-      
-      .side-line, .side-dot { display: none; }
+
+      .main-content {
+        justify-content: flex-start;
+      }
+
+      .topbar {
+        padding: 18px 20px 0;
+      }
+
+      .topbar-logo img {
+        width: 95px;
+      }
+
+      .main-content {
+        padding: 20px 20px 0;
+      }
+
+      .logo-glow {
+        width: 70px;
+        height: 70px;
+      }
+
+      .logo-lg {
+        width: 80px;
+      }
+
+      .headline {
+        font-size: 24px;
+      }
+
+      .description {
+        max-width: 380px;
+
+        font-size: 13px;
+      }
+
+      .coming-soon {
+        width: 420px;
+
+        margin-top: 16px;
+        margin-bottom: 14px;
+      }
+
+      .waitlist-card {
+        width: 420px;
+        padding: 16px 20px 14px;
+      }
+
+      .features {
+        width: 420px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 10px;
+
+        text-align: center;
+
+        padding: 20px 20px 18px;
+      }
+
     }
-    
-    @media (max-height: 700px) {
-      .logo-wrap { margin-bottom: 20px; }
-      .headline { font-size: 2.2rem; margin-bottom: 10px; }
-      .desc { margin-bottom: 25px; }
-      .email-form { margin-bottom: 30px; }
-      .logo-lg { height: 60px; } /* Increased for smaller screens as well */
+
+
+    @media (max-width: 480px) {
+
+      .waitlist-card,
+      .features,
+      .coming-soon,
+      .description {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .headline {
+        font-size: 20px;
+        padding: 0 6px;
+      }
+
+      .description {
+        max-width: 300px;
+        font-size: 12px;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
-
-  <!-- Background Ambient Glows -->
-  <div class="glow-1"></div>
-  <div class="glow-2"></div>
-  <div class="center-glow"></div>
-
-  <!-- Decorative Side Elements -->
-  <div class="side-line left"></div>
-  <div class="side-line right"></div>
-  <div class="side-dot d1"></div>
-  <div class="side-dot d2"></div>
-  <div class="side-dot d3"></div>
-  <div class="side-dot d4"></div>
 
   <div class="page">
 
-    <!-- Header / Logo -->
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <header class="topbar">
+
       <a href="#" class="topbar-logo">
-        <img class="logo-sm" src="https://crewkart.com/heading (2).png" alt="CrewKart">
+
+        <!-- TOP-LEFT LOGO -->
+        <img
+          src="CREWKART__5_-removebg-preview.png"
+          alt="CrewKart Logo"
+        >
+
       </a>
+
     </header>
 
-    <main class="center">
-      
-      <!-- Status Pill -->
-      <div class="coming-soon">
-        We're Coming Soon <span class="coming-soon-dot"></span>
-      </div>
-      
-      <!-- Main Branding & Typography -->
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main-content">
+
+
+      <!-- =========================
+           CENTER LOGO
+      ========================== -->
+
       <div class="logo-wrap">
+
         <div class="logo-glow"></div>
-        <img class="logo-lg" src="https://crewkart.com/heading (2).png" alt="CrewKart">
+
+        <!-- CENTER LOGO -->
+        <img
+          class="logo-lg"
+          src="heading (2).png"
+          alt="CrewKart"
+        >
+
       </div>
 
-      <h1 class="headline">Connect. Create. Collaborate.</h1>
-      
-      <p class="desc">
-        The trusted marketplace where forward-thinking businesses meet creative professionals of every kind. Drop your email — we'll notify you at launch.
+
+      <!-- =========================
+           HEADLINE
+      ========================== -->
+
+      <h1 class="headline">
+
+        Connect.
+        <span class="accent">Create.</span>
+        Collaborate.
+
+      </h1>
+
+
+      <!-- =========================
+           DESCRIPTION
+      ========================== -->
+
+      <p class="description">
+
+        The marketplace where creators connect with
+        verified creative professionals to bring ideas to life.
+
       </p>
 
-      <!-- Email Capture -->
-      <form class="email-form" onsubmit="handleSubmit(event)">
-        <input type="email" id="email" name="email" class="email-input" placeholder="Enter your email address..." required>
-        <button type="submit" class="submit-btn">Notify Me</button>
-      </form>
 
-      <!-- Social Links -->
-      <div class="social-links">
-        <a href="https://instagram.com/crewkart" target="_blank" rel="noopener" class="social-link">
-          <div class="social-link-icon">
-            <iconify-icon icon="lucide:instagram"></iconify-icon>
-          </div>
-          <span class="social-link-label">Instagram</span>
-        </a>
-        <a href="https://facebook.com/crewkart" target="_blank" rel="noopener" class="social-link">
-          <div class="social-link-icon">
-            <iconify-icon icon="lucide:facebook"></iconify-icon>
-          </div>
-          <span class="social-link-label">Facebook</span>
-        </a>
-        <a href="https://x.com/_crewkart" target="_blank" rel="noopener" class="social-link">
-          <div class="social-link-icon">
-            <iconify-icon icon="ri:twitter-x-fill"></iconify-icon>
-          </div>
-          <span class="social-link-label">X</span>
-        </a>
-        <a href="https://www.linkedin.com/company/crewkart/" target="_blank" rel="noopener" class="social-link">
-          <div class="social-link-icon">
-            <iconify-icon icon="lucide:linkedin"></iconify-icon>
-          </div>
-          <span class="social-link-label">LinkedIn</span>
-        </a>
-        <a href="https://reddit.com/u/crewkart" target="_blank" rel="noopener" class="social-link">
-          <div class="social-link-icon">
-            <iconify-icon icon="lucide:message-circle"></iconify-icon>
-          </div>
-          <span class="social-link-label">Reddit</span>
-        </a>
+      <!-- =========================
+           COMING SOON
+      ========================== -->
+
+      <div class="coming-soon">
+
+        <div class="coming-line"></div>
+
+        <span class="coming-text">
+          WE'RE COMING SOON
+        </span>
+
+        <div class="coming-line"></div>
+
       </div>
+
+
+      <!-- =========================
+           WAITLIST CARD
+      ========================== -->
+
+      <section class="waitlist-card">
+
+        <form
+          class="email-form"
+          onsubmit="handleSubmit(event)"
+        >
+
+          <input
+            type="email"
+            id="email"
+            class="email-input"
+            placeholder="Enter your email address"
+            required
+          >
+
+          <button
+            type="submit"
+            class="submit-btn"
+          >
+            Notify Me
+          </button>
+
+        </form>
+
+
+        <!-- SOCIAL PROOF -->
+
+        <div class="social-proof">
+
+          <div class="avatars">
+
+            <div class="avatar">A</div>
+            <div class="avatar">R</div>
+            <div class="avatar">S</div>
+
+          </div>
+
+          <span>
+            <strong>100+</strong>
+            people already joined the waitlist
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           FEATURE CARDS
+      ========================== -->
+
+      <section class="features">
+
+
+        <!-- CARD 1 -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+
+            <iconify-icon
+              icon="lucide:users"
+            ></iconify-icon>
+
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Verified Professionals
+            </h3>
+
+            <p>
+              All creators are verified and
+              quality checked.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+
+            <iconify-icon
+              icon="lucide:zap"
+            ></iconify-icon>
+
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Smart Matching
+            </h3>
+
+            <p>
+              We match you with the
+              perfect creative professional.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- CARD 3 -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+
+            <iconify-icon
+              icon="lucide:shield-check"
+            ></iconify-icon>
+
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Secure Payments
+            </h3>
+
+            <p>
+              100% secure transactions
+              and payment protection.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           SOCIAL
+      ========================== -->
+
+      <p class="follow-title">
+        Follow our journey
+      </p>
+
+
+      <div class="social-links">
+
+
+        <!-- Facebook -->
+
+        <a
+          href="https://facebook.com/crewkart"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Facebook"
+        >
+
+          <iconify-icon
+            icon="lucide:facebook"
+          ></iconify-icon>
+
+        </a>
+
+
+        <!-- LinkedIn -->
+
+        <a
+          href="https://www.linkedin.com/company/crewkart/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="LinkedIn"
+        >
+
+          <iconify-icon
+            icon="lucide:linkedin"
+          ></iconify-icon>
+
+        </a>
+
+
+        <!-- X -->
+
+        <a
+          href="https://x.com/_crewkart"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="X"
+        >
+
+          <iconify-icon
+            icon="ri:twitter-x-fill"
+          ></iconify-icon>
+
+        </a>
+
+
+        <!-- Instagram -->
+
+        <a
+          href="https://instagram.com/crewkart"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Instagram"
+        >
+
+          <iconify-icon
+            icon="lucide:instagram"
+          ></iconify-icon>
+
+        </a>
+
+
+        <!-- YouTube -->
+
+        <a
+          href="#"
+          class="social-link"
+          aria-label="YouTube"
+        >
+
+          <iconify-icon
+            icon="lucide:youtube"
+          ></iconify-icon>
+
+        </a>
+
+
+      </div>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bottombar">
-      <span class="bottombar-copy">© 2026 CrewKart. All rights reserved.</span>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+      <span>
+        © 2026 CrewKart. All rights reserved.
+      </span>
+
+
+      <div class="footer-links">
+
+        <a href="#">
+          Privacy Policy
+        </a>
+
+        <span class="separator">|</span>
+
+        <a href="#">
+          Terms of Service
+        </a>
+
+        <span class="separator">|</span>
+
+        <a href="#">
+          Contact Us
+        </a>
+
+      </div>
+
     </footer>
 
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">
-    <iconify-icon id="toast-icon" icon="lucide:check-circle" style="font-size: 18px; color: #A855FF;"></iconify-icon>
-    <span id="toast-msg"></span>
-  </div>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
 
   <script>
-    var toastTimer;
-    function showToast(msg, isError) {
-      var toast = document.getElementById('toast');
-      var icon = document.getElementById('toast-icon');
-      document.getElementById('toast-msg').textContent = msg;
-      
-      toast.classList.remove('error');
-      
-      if (isError) {
-        toast.classList.add('error');
-        icon.setAttribute('icon', 'lucide:alert-circle');
-        icon.style.color = '#EF4444';
-      } else {
-        icon.setAttribute('icon', 'lucide:check-circle');
-        icon.style.color = '#A855FF';
+
+    function handleSubmit(event) {
+
+      event.preventDefault();
+
+      const emailInput =
+        document.getElementById("email");
+
+      const email =
+        emailInput.value.trim();
+
+      if (!email) {
+        return;
       }
-      
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3000);
+
+      /*
+        Keep your existing Google Sheets
+        submission endpoint here if required.
+      */
+
+      alert(
+        "Thank you! You have been added to the waitlist."
+      );
+
+      emailInput.value = "";
+
     }
 
-    function handleSubmit(e) {
-      e.preventDefault();
-
-      var email = document.getElementById('email').value.trim();
-      if (!email) return;
-
-      // Show success instantly
-      showToast("You're on the list! We'll reach out soon.");
-      document.getElementById('email').value = '';
-
-      // Send to Google Sheets in background
-      fetch("https://script.google.com/macros/s/AKfycbwTUF5lOHVYEEowbLnoZafIs-8wn95p0I6Xn6a37A446fr105G7cGhPi48UR1aaNJ29GQ/exec", {
-        method: "POST",
-        body: new URLSearchParams({
-          email: email
-        })
-      }).catch(err => {
-        console.log("Background submission failed");
-      });
-    }
   </script>
-</body>
 
+</body>
 </html>
